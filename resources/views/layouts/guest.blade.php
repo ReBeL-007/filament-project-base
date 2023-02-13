@@ -12,10 +12,18 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        @livewireStyles
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
+            @include('partials.guest-nav')
             {{ $slot }}
+            
         </div>
+
+        @livewireScripts
     </body>
 </html>

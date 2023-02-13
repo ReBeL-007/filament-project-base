@@ -2,6 +2,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/tailwind-starter-kit-main
 /storage/*.key
 /vendor
 .env

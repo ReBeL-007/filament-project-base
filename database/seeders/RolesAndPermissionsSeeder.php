@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -23,7 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         // reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
+        
         // Misc
         $miscPermission = Permission::create(['name' => 'N/A']);
 

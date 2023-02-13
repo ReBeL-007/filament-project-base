@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\LandingPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', LandingPage::class)->name('home');
 
 // Route::get('/register', \App\Http\Livewire\Auth\Register::class);
 Route::middleware([
