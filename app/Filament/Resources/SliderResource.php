@@ -2,17 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SliderResource\Pages;
-use App\Filament\Resources\SliderResource\RelationManagers;
-use App\Models\Slider;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Slider;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\SliderResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SliderResource\RelationManagers;
 
 class SliderResource extends Resource
 {
@@ -30,7 +31,15 @@ class SliderResource extends Resource
                         '0' => 'Draft',
                         '1' => 'Active',
                         '2' => 'Inactive',
-                    ])->required()
+                    ])
+                    ->default(0)
+                    ->disablePlaceholderSelection()
+                    ->required(),
+                FileUpload::make('image')
+                    ->directory('slider-image')
+                    ->image()
+                    ->minSize(512)
+                    ->maxSize(2048)
             ]);
     }
 
@@ -52,14 +61,14 @@ class SliderResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -67,5 +76,5 @@ class SliderResource extends Resource
             'create' => Pages\CreateSlider::route('/create'),
             'edit' => Pages\EditSlider::route('/{record}/edit'),
         ];
-    }    
+    }
 }
