@@ -14,4 +14,9 @@ class Site extends Model
     protected $casts = [
         'urls' => 'json',
     ];
+
+    public function checks()
+    {
+        return $this->hasMany(Check::class);
+    }
 }

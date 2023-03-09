@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SiteResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SiteResource\RelationManagers;
+use App\Filament\Resources\PostResource\RelationManagers\ChecksRelationManager;
 
 class SiteResource extends Resource
 {
@@ -48,7 +49,9 @@ class SiteResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('urls')
                     ->label('No. URLs')
                     ->getStateUsing(function (Site $record) {
@@ -69,7 +72,7 @@ class SiteResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ChecksRelationManager::class,
         ];
     }
 
