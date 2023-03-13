@@ -19,4 +19,9 @@ class Site extends Model
     {
         return $this->hasMany(Check::class);
     }
+
+    public function lastCheck()
+    {
+        return $this->hasOne(Check::class)->latestOfMany('created_at');
+    }
 }

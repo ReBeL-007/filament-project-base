@@ -22,8 +22,4 @@ class Check extends Model
         return $this->belongsTo(Site::class);
     }
 
-    public function lastCheck()
-    {
-        return $this->hasOne(Check::class)->latestOfMany('created_at');
-    }
 }
