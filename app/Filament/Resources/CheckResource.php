@@ -50,15 +50,20 @@ class CheckResource extends Resource
                         'danger' => 'failed',
                         'warning' => 'in_progress',
                         'success' => 'complete'
-                    ]),
+                    ])
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Start Date & Time')
                     ->dateTime(),
                 TextColumn::make('completed_at')
                     ->label('End Date & Time')
                     // ->default(new HtmlString('&ndash;'))
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
             ])
+            // ->actions([
+            //     LinkAction::make('View')
+            // ])
             ->filters([
                 //
             ])
