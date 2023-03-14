@@ -9,11 +9,13 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
+use Filament\Tables\Actions\LinkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CheckResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\CheckResource\Pages\ListChecks;
 use App\Filament\Resources\CheckResource\RelationManagers;
 use App\Filament\Resources\PostResource\RelationManagers\ChecksRelationManager;
 
@@ -63,17 +65,14 @@ class CheckResource extends Resource
                     ->dateTime()
                     ->sortable(),
             ])
-            // ->actions([
-            //     LinkAction::make('View')
-            // ])
+            ->defaultSort('completed_at','desc')
+            ->prependActions([
+                LinkAction::make('View')
+                    ->url(fn ($record) => static::getUrl('view', ['record' => $record]))
+                    ->hidden(fn ($livewire) => $livewire instanceof ListChecks),
+            ])
             ->filters([
                 //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -88,8 +87,7 @@ class CheckResource extends Resource
     {
         return [
             'index' => Pages\ListChecks::route('/'),
-            'create' => Pages\CreateCheck::route('/create'),
-            'edit' => Pages\EditCheck::route('/{record}/edit'),
+            'view' => Pages\ViewCheck::route('/{record}'),
         ];
     }
 }

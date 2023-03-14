@@ -22,7 +22,7 @@ class SiteResource extends Resource
     protected static ?string $model = Site::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe';
-    
+
     protected static ?string $navigationGroup = 'Uptime Checker';
 
     public static function form(Form $form): Form
