@@ -23,6 +23,8 @@ class CheckResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
 
+    protected static ?string $navigationGroup = 'Uptime Checker';
+
     public static function form(Form $form): Form
     {
         return $form
